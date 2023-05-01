@@ -9,6 +9,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.cluster import KMeans
+from sklearn.neural_network import MLPClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.gaussian_process import GaussianProcessClassifier
 import matplotlib.pyplot as plt
 
 
@@ -35,7 +38,10 @@ classifiers = [
     KNeighborsClassifier(),
     GaussianNB(),
     SVC(),
-    KMeans(n_clusters=2, n_init=10)
+    KMeans(n_clusters=2, n_init=10),
+    MLPClassifier(),
+    LinearDiscriminantAnalysis(),
+    GaussianProcessClassifier()
 ]
 
 # Define a list of classifier names for plotting
@@ -46,7 +52,10 @@ classifier_names = [
     'K-Nearest Neighbors',
     'Naive Bayes',
     'Support Vector Machine',
-    'K-Means Clustering'
+    'K-Means Clustering',
+    'Multilayer Perceptron',
+    'Linear Discriminant Analysis',
+    'Gaussian Process'
 ]
 
 # Train and evaluate each classifier
@@ -80,3 +89,8 @@ print(f'The best classifier is {best_clf_name} with an average score of {avg_sco
 # Evaluate the best classifier on the testing set
 best_clf = classifiers[best_clf_idx]
 best_clf.fit(X_train, y_train)
+y_pred = best_clf.predict(X_test)
+acc = accuracy_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+auc = roc_auc_score(y_test, y_pred)
+print(f'The best classifier achieved an accuracy of {acc:.4f} F')

@@ -39,7 +39,7 @@ classifiers = [
     GaussianNB(),
     SVC(),
     KMeans(n_clusters=2, n_init=10),
-    MLPClassifier(),
+    MLPClassifier(max_iter=1000, early_stopping=True, validation_fraction=0.2),
     LinearDiscriminantAnalysis(),
     GaussianProcessClassifier()
 ]
